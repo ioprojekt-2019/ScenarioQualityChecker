@@ -1,21 +1,16 @@
 package pl.put.poznan.transformer.rest;
 
-import org.apache.coyote.Response;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.ArrayList;
 import java.util.Map;
-
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import pl.put.poznan.transformer.logic.domain.dto.ScenarioDTO;
-import pl.put.poznan.transformer.logic.domain.dto.ScenarioStepDTO;
 import pl.put.poznan.transformer.logic.service.ScenarioStepsCounterService;
-import pl.put.poznan.transformer.logic.serviceimpl.ScenarioStepsCounterServiceImpl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
