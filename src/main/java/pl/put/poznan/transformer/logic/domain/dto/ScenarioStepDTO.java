@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ScenarioStepDTO {
     private String name;
-    private ArrayList<ScenarioStepDTO> steps;
+    private ArrayList<ScenarioStepDTO> steps = new ArrayList<>();
 
     public String getName() {
         return name;
