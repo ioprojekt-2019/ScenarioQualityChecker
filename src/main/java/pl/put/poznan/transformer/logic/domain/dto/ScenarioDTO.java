@@ -6,7 +6,7 @@ public class ScenarioDTO {
     private String title;
     private String systemActor;
     private ArrayList<String> actors;
-    private ArrayList<ScenarioStepDTO> steps;
+    private ArrayList<ScenarioStepDTO> steps = new ArrayList<>();
 
     public ArrayList<ScenarioStepDTO> getSteps() {
         return steps;
