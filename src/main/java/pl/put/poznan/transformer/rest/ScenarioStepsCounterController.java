@@ -18,6 +18,17 @@ public class ScenarioStepsCounterController {
         this.scenarioStepsCounterService = scenarioStepsCounterService;
     }
 
+    /**
+     * Method: GET<br>
+     * Endpoint: /api/scenario/steps/count<br>
+     * @param scenarioDTO Object representing scenario created from parsed JSON body
+     * @return Object representing below JSON with example values:
+     *      <pre>
+     *      {
+     *          "count": 12
+     *      }
+     *      </pre>
+     */
     @GetMapping("/scenario/steps/count")
     public ResponseEntity<Map<String, Integer>> countScenarioStepsAction(@RequestBody ScenarioDTO scenarioDTO) {
         int stepsCount = scenarioStepsCounterService.getCount(scenarioDTO);
