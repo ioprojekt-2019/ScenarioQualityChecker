@@ -1,11 +1,22 @@
 package pl.put.poznan.transformer.logic.domain.dto;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import pl.put.poznan.transformer.logic.validator.ListOfNonemptyStrings;
+
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 public class ScenarioDTO {
+    @NotEmpty(message = "Title can't be empty")
     private String title;
+
+    @NotEmpty(message = "System actor can't be empty")
     private String systemActor;
-    private ArrayList<String> actors;
+
+    @ListOfNonemptyStrings(message = "Each actor must be a nonempty string")
+    private ArrayList<String> actors = new ArrayList<>();
+
+    @Valid
     private ArrayList<ScenarioStepDTO> steps = new ArrayList<>();
 
     public ArrayList<ScenarioStepDTO> getSteps() {
