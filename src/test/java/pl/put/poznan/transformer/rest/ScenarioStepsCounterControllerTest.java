@@ -31,14 +31,14 @@ public class ScenarioStepsCounterControllerTest {
         mockScenarioStepsCounterServiceReturnsFive();
         ResponseEntity<Map<String, Integer>> result = scenarioStepsCounterController
                 .countScenarioStepsAction(new ScenarioDTO());
-        assertHaveStepsCountAnd200HttpStatus(result);
+        assertHaveKeywordsCountAnd200HttpStatus(result);
     }
 
     private void mockScenarioStepsCounterServiceReturnsFive() {
         Mockito.when(scenarioStepsCounterService.getCount(Mockito.any())).thenReturn(5);
     }
 
-    private void assertHaveStepsCountAnd200HttpStatus(ResponseEntity<Map<String, Integer>> response) {
+    private void assertHaveKeywordsCountAnd200HttpStatus(ResponseEntity<Map<String, Integer>> response) {
         assertTrue(response.getBody().containsKey("count"));
         assertEquals(5, response.getBody().get("count").intValue());
         assertEquals(HttpStatus.OK, response.getStatusCode());
