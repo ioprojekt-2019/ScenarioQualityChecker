@@ -1,3 +1,6 @@
+# Build info
+![Build status](<https://travis-ci.com/ioprojekt-2019/ScenarioQualityChecker.svg?branch=develop>)
+
 # ScenarioQualityChecker
 <h2>Example scenario JSON syntax</h2>
 
