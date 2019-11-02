@@ -1,5 +1,6 @@
 package pl.put.poznan.transformer.logic.serviceimpl;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.put.poznan.transformer.logic.domain.dto.ScenarioDTO;
 import pl.put.poznan.transformer.logic.domain.dto.ScenarioStepDTO;
@@ -10,7 +11,11 @@ import java.util.ArrayList;
 @Service
 public class ScenarioKeywordsCounterServiceImpl implements ScenarioKeywordsCounterService {
 
-    private final String[] keywords = {"IF", "ELSE", "FOR EACH"};
+    private String[] keywords;
+
+    public ScenarioKeywordsCounterServiceImpl(@Value("${scenario.keywords}") String[] keywords) {
+        this.keywords = keywords;
+    }
 
     @Override
     public int getNumberOfKeywords(ScenarioDTO scenarioDTO) {
