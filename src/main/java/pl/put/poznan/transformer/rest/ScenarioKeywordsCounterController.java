@@ -11,6 +11,9 @@ import pl.put.poznan.transformer.logic.service.ScenarioKeywordsCounterService;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller that handles requests related to keyword counting
+ */
 @RestController
 public class ScenarioKeywordsCounterController {
     private final ScenarioKeywordsCounterService scenarioKeywordsCounterService;
@@ -19,6 +22,18 @@ public class ScenarioKeywordsCounterController {
         this.scenarioKeywordsCounterService = scenarioKeywordsCounterService;
     }
 
+    /**
+     * Method: GET
+     * Endpoint: /api/scenario/keywords/count
+     *
+     * @param scenarioDTO scenario object representing parsed JSON body
+     * @return JSON containing calculated value:
+     * <pre>
+     *      {
+     *          "count": number of keywords
+     *      }
+     * </pre>
+     */
     @GetMapping("/scenario/keywords/count")
     public ResponseEntity<Map<String, Integer>> countScenarioKeywordsAction(@RequestBody ScenarioDTO scenarioDTO) {
         int keywordsCount = scenarioKeywordsCounterService.getNumberOfKeywords(scenarioDTO);
