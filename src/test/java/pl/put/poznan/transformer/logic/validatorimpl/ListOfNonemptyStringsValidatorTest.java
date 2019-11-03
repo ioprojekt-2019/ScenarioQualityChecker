@@ -24,11 +24,11 @@ public class ListOfNonemptyStringsValidatorTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {true, new ArrayList<String>()},
-                {true, Arrays.asList(new String[]{"String 1", "S"})},
-                {true, Arrays.asList(new String[]{"S", "S"})},
-                {false, Arrays.asList(new String[]{"", "Text"})},
-                {false, Arrays.asList(new String[]{"Text", null})},
-                {false, Arrays.asList(new String[]{"", null})}
+                {true, Arrays.asList("String 1", "S")},
+                {true, Arrays.asList("S", "S")},
+                {false, Arrays.asList("", "Text")},
+                {false, Arrays.asList("Text", null)},
+                {false, Arrays.asList("", null)}
         });
     }
 
