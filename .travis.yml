@@ -1,3 +1,2 @@
 language: java
-after-success: 
-  - mvn site
+after_script: "mvn site"
