@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.transformer.logic.domain.dto.ScenarioDTO;
 import pl.put.poznan.transformer.logic.service.ScenarioKeywordsCounterService;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class ScenarioKeywordsCounterController {
      * </pre>
      */
     @GetMapping("/scenario/keywords/count")
-    public ResponseEntity<Map<String, Integer>> countScenarioKeywordsAction(@RequestBody ScenarioDTO scenarioDTO) {
+    public ResponseEntity<Map<String, Integer>> countScenarioKeywordsAction(@Valid @RequestBody ScenarioDTO scenarioDTO) {
         int keywordsCount = scenarioKeywordsCounterService.getNumberOfKeywords(scenarioDTO);
         Map<String, Integer> response = new HashMap<>();
         response.put("count", keywordsCount);

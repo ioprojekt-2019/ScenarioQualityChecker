@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.transformer.logic.domain.dto.ScenarioDTO;
 import pl.put.poznan.transformer.logic.service.ScenarioStepsCounterService;
+
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +32,7 @@ public class ScenarioStepsCounterController {
      *      </pre>
      */
     @GetMapping("/scenario/steps/count")
-    public ResponseEntity<Map<String, Integer>> countScenarioStepsAction(@RequestBody ScenarioDTO scenarioDTO) {
+    public ResponseEntity<Map<String, Integer>> countScenarioStepsAction(@Valid @RequestBody ScenarioDTO scenarioDTO) {
         int stepsCount = scenarioStepsCounterService.getCount(scenarioDTO);
         Map<String, Integer> response = new HashMap<>();
         response.put("count", stepsCount);
