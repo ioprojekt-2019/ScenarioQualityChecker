@@ -5,13 +5,13 @@ import pl.put.poznan.transformer.logic.domain.dto.ScenarioDTO;
 import java.util.ArrayList;
 
 /**
- * Service used to find lines that don't start with the actor.
+ * Service used to find step names that don't start with the actor.
  */
-public interface ScenarioLinesWithoutActorInFirstWordService {
+public interface FindScenarioStepNamesNotStartingWithActorService {
     /**
      * Find lines that don't start with the actor.
      * @param scenarioDTO Object representing scenario
-     * @return Lines that don't start with the actor
+     * @return Step names that don't start with actor
      */
-    public ArrayList<String> getLines(ScenarioDTO scenarioDTO);
+    public ArrayList<String> findStepNames(ScenarioDTO scenarioDTO);
 }
