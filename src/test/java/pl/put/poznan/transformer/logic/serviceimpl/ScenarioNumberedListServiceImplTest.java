@@ -41,7 +41,7 @@ public class ScenarioNumberedListServiceImplTest {
         assertTrue(result.contains(String.format("1. %s", EXAMPLE__STEP_NAME)));
         assertTrue(result.contains(String.format("2. %s", EXAMPLE__STEP_NAME)));
         assertTrue(result.contains(String.format("3. %s", EXAMPLE__STEP_NAME)));
-        assertFalse(result.contains("1.1 "));
+        assertFalse(result.contains("\n\t1.1 "));
 
     }
 
@@ -54,7 +54,7 @@ public class ScenarioNumberedListServiceImplTest {
         assertTrue(result.contains(String.format("1. %s", EXAMPLE__STEP_NAME)));
         assertTrue(result.contains(String.format("\t1.1. %s", EXAMPLE__STEP_NAME)));
         assertTrue(result.contains(String.format("\t\t1.1.1. %s", EXAMPLE__STEP_NAME)));
-        assertFalse(result.contains("1.2 "));
+        assertFalse(result.contains("\n\t1.2 "));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class ScenarioNumberedListServiceImplTest {
 
         assertTrue(result.contains(String.format("1. %s", EXAMPLE__STEP_NAME)));
         assertTrue(result.contains(String.format("\t1.1. %s", EXAMPLE__STEP_NAME)));
-        assertFalse(result.contains("2. "));
+        assertFalse(result.contains("\n2. "));
     }
 
     private ScenarioDTO prepareOneDepthScenarioWithThreeSteps() {

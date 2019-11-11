@@ -47,9 +47,7 @@ public class ScenarioNumberedListServiceImpl implements ScenarioNumberedListServ
             for(int num : currentStep){
                 sb.append(String.format("%d.", num));
             }
-            if(step.getName() != null){
-                sb.append(String.format(" %s", step.getName()));
-            }
+            sb.append(String.format(" %s", step.getName()));
             sb.append("\n");
             sb.append(getListOnGivenDepth(step.getSteps(), depth+1, new ArrayList<>(currentStep)));
             stepIndex++;
