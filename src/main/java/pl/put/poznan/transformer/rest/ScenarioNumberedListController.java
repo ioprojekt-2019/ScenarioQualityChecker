@@ -15,7 +15,7 @@ import java.util.Map;
 
 
 /**
- * Controller that handles requests related getting scenario as numbered list
+ * Controller that handles requests related to getting scenario as numbered list
  */
 @RestController
 public class ScenarioNumberedListController {
