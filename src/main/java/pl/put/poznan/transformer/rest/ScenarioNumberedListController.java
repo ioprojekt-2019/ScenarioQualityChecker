@@ -27,7 +27,7 @@ public class ScenarioNumberedListController {
 
     /**
      * Method: GET<br>
-     * Endpoint: /api/scenario/list<br>
+     * Endpoint: /api/scenario/numbered-steps<br>
      * @param scenarioDTO Object representing scenario created from parsed JSON body
      * @return Object representing below JSON with example values:
      *      <pre>
@@ -43,11 +43,11 @@ public class ScenarioNumberedListController {
      *      }
      *      </pre>
      */
-   @GetMapping("/scenario/list")
+   @GetMapping("/scenario/numbered-steps")
     public ResponseEntity<Map<String, String>> numberedListAction(@Valid @RequestBody ScenarioDTO scenarioDTO) {
         String stepsList = scenarioNumberedListService.getScenarioAsNumberedList(scenarioDTO);
         Map<String, String> response = new HashMap<>();
-        response.put("list", stepsList);
+        response.put("numbered-steps", stepsList);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

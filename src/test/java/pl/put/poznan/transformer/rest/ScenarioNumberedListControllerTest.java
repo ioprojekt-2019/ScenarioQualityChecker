@@ -44,8 +44,8 @@ public class ScenarioNumberedListControllerTest {
     }
 
     private void assertHaveTitleStringAnd200ResponseCode(ResponseEntity<Map<String, String>> response) {
-        assertTrue(response.getBody().containsKey("list"));
-        assertEquals("Title", response.getBody().get("list").toString());
+        assertTrue(response.getBody().containsKey("numbered-steps"));
+        assertEquals("Title", response.getBody().get("numbered-steps").toString());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }
