@@ -16,7 +16,7 @@ public class ScenarioNumberedListServiceImplTest {
     private final String EXAMPLE_TITLE = "HOLIDAYS";
     private final String EXAMPLE_ACTOR = "EMPLOYEE";
     private final String EXAMPLE_SYSTEM_ACTOR = "SOFTWARE";
-    private final String EXAMPLE__STEP_NAME = "EMPLOYEE REQUESTS HOLIDAYS";
+    private final String EXAMPLE_STEP_NAME = "EMPLOYEE REQUESTS HOLIDAYS";
 
     @Before
     public void setUp() {
@@ -25,7 +25,7 @@ public class ScenarioNumberedListServiceImplTest {
 
 
     @Test
-    public void testGetScenarioAsNumberedListReturnOnlyHeaderOnEmptyScenario() {
+    public void testGetScenarioAsNumberedListReturnOnlyNumberedListHeaderOnEmptyScenario() {
         ScenarioDTO scenarioDTO = new ScenarioDTO();
         String result = scenarioNumberedListService.getScenarioAsNumberedList(scenarioDTO);
         assertTrue(result.startsWith("Title:"));
@@ -38,11 +38,10 @@ public class ScenarioNumberedListServiceImplTest {
         String result = scenarioNumberedListService.getScenarioAsNumberedList(scenarioDTO);
         assertTrue(result.startsWith(String.format("Title: %s", EXAMPLE_TITLE)));
 
-        assertTrue(result.contains(String.format("1. %s", EXAMPLE__STEP_NAME)));
-        assertTrue(result.contains(String.format("2. %s", EXAMPLE__STEP_NAME)));
-        assertTrue(result.contains(String.format("3. %s", EXAMPLE__STEP_NAME)));
+        assertTrue(result.contains(String.format("1. %s", EXAMPLE_STEP_NAME)));
+        assertTrue(result.contains(String.format("2. %s", EXAMPLE_STEP_NAME)));
+        assertTrue(result.contains(String.format("3. %s", EXAMPLE_STEP_NAME)));
         assertFalse(result.contains("\n\t1.1 "));
-
     }
 
     @Test
@@ -51,9 +50,9 @@ public class ScenarioNumberedListServiceImplTest {
         String result = scenarioNumberedListService.getScenarioAsNumberedList(scenarioDTO);
         assertTrue(result.startsWith(String.format("Title: %s", EXAMPLE_TITLE)));
 
-        assertTrue(result.contains(String.format("1. %s", EXAMPLE__STEP_NAME)));
-        assertTrue(result.contains(String.format("\t1.1. %s", EXAMPLE__STEP_NAME)));
-        assertTrue(result.contains(String.format("\t\t1.1.1. %s", EXAMPLE__STEP_NAME)));
+        assertTrue(result.contains(String.format("1. %s", EXAMPLE_STEP_NAME)));
+        assertTrue(result.contains(String.format("\t1.1. %s", EXAMPLE_STEP_NAME)));
+        assertTrue(result.contains(String.format("\t\t1.1.1. %s", EXAMPLE_STEP_NAME)));
         assertFalse(result.contains("\n\t1.2 "));
     }
 
@@ -63,37 +62,37 @@ public class ScenarioNumberedListServiceImplTest {
         String result = scenarioNumberedListService.getScenarioAsNumberedList(scenarioDTO);
         assertTrue(result.startsWith(String.format("Title: %s", EXAMPLE_TITLE)));
 
-        assertTrue(result.contains(String.format("1. %s", EXAMPLE__STEP_NAME)));
-        assertTrue(result.contains(String.format("\t1.1. %s", EXAMPLE__STEP_NAME)));
+        assertTrue(result.contains(String.format("1. %s", EXAMPLE_STEP_NAME)));
+        assertTrue(result.contains(String.format("\t1.1. %s", EXAMPLE_STEP_NAME)));
         assertFalse(result.contains("\n2. "));
     }
 
     private ScenarioDTO prepareOneDepthScenarioWithThreeSteps() {
         ScenarioDTO scenarioDTO = prepareScenario(3);
-        scenarioDTO.getSteps().get(0).setName(EXAMPLE__STEP_NAME);
-        scenarioDTO.getSteps().get(1).setName(EXAMPLE__STEP_NAME);
-        scenarioDTO.getSteps().get(2).setName(EXAMPLE__STEP_NAME);
+        scenarioDTO.getSteps().get(0).setName(EXAMPLE_STEP_NAME);
+        scenarioDTO.getSteps().get(1).setName(EXAMPLE_STEP_NAME);
+        scenarioDTO.getSteps().get(2).setName(EXAMPLE_STEP_NAME);
         return scenarioDTO;
     }
 
     private ScenarioDTO prepareThreeDepthsMixedScenario() {
         ScenarioDTO scenarioDTO = prepareScenario(2);
-        scenarioDTO.getSteps().get(0).setName(EXAMPLE__STEP_NAME);
+        scenarioDTO.getSteps().get(0).setName(EXAMPLE_STEP_NAME);
         scenarioDTO.getSteps().get(0).setSteps(generateScenarioSteps(1));
-        scenarioDTO.getSteps().get(0).getSteps().get(0).setName(EXAMPLE__STEP_NAME);
+        scenarioDTO.getSteps().get(0).getSteps().get(0).setName(EXAMPLE_STEP_NAME);
         scenarioDTO.getSteps().get(0).getSteps().get(0).setSteps(generateScenarioSteps(1));
-        scenarioDTO.getSteps().get(0).getSteps().get(0).getSteps().get(0).setName(EXAMPLE__STEP_NAME);
+        scenarioDTO.getSteps().get(0).getSteps().get(0).getSteps().get(0).setName(EXAMPLE_STEP_NAME);
 
-        scenarioDTO.getSteps().get(1).setName(EXAMPLE__STEP_NAME);
+        scenarioDTO.getSteps().get(1).setName(EXAMPLE_STEP_NAME);
 
         return scenarioDTO;
     }
 
     private ScenarioDTO prepareTwoDepthsScenario() {
         ScenarioDTO scenarioDTO = prepareScenario(1);
-        scenarioDTO.getSteps().get(0).setName(EXAMPLE__STEP_NAME);
+        scenarioDTO.getSteps().get(0).setName(EXAMPLE_STEP_NAME);
         scenarioDTO.getSteps().get(0).setSteps(generateScenarioSteps(2));
-        scenarioDTO.getSteps().get(0).getSteps().get(0).setName(EXAMPLE__STEP_NAME);
+        scenarioDTO.getSteps().get(0).getSteps().get(0).setName(EXAMPLE_STEP_NAME);
 
         return scenarioDTO;
     }
