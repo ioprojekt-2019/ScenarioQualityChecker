@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @Service
 public class ScenarioNumberedListServiceImpl implements ScenarioNumberedListService {
-    
+
     @Override
     public String getScenarioAsNumberedList(ScenarioDTO scenarioDTO) {
         return createNumberedListString(scenarioDTO);
@@ -21,16 +21,8 @@ public class ScenarioNumberedListServiceImpl implements ScenarioNumberedListServ
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("Title: %s\n", scenario.getTitle()));
         sb.append("Actors: ");
-        boolean firstActor = true;
-        for(String actor : scenario.getActors()){
-            if(firstActor){
-                sb.append(String.format("%s", actor));
-                firstActor = false;
-            }else{
-                sb.append(String.format(", %s", actor));
-            }
-        }
-        sb.append(String.format("\nSystem actors: %s\n\n", scenario.getSystemActor()));
+        sb.append(String.join(", ", scenario.getActors()));
+        sb.append(String.format("\nSystem actor: %s\n\n", scenario.getSystemActor()));
         ArrayList<ScenarioStepDTO> steps = scenario.getSteps();
         if(steps.size() <= 0){
             return sb.toString();
