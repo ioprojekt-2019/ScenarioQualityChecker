@@ -11,11 +11,7 @@ import java.util.ArrayList;
 
 @Service
 public class ScenarioNumberedListServiceImpl implements ScenarioNumberedListService {
-
-
-    public ScenarioNumberedListServiceImpl() {
-    }
-
+    
     @Override
     public String getScenarioAsNumberedList(ScenarioDTO scenarioDTO) {
         return createNumberedListString(scenarioDTO);
