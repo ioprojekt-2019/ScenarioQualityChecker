@@ -21,7 +21,7 @@ public class FindScenarioStepNamesNotStartingWithActorServiceController {
     }
 
     /**
-     * Method: GetMapping<br>
+     * Method: Post<br>
      * Endpoint: /api/scenario/steps/count<br>
      * @param scenarioDTO Object representing scenario created from parsed JSON body
      * @return JSON containing incorrect step names:

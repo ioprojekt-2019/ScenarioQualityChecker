@@ -35,11 +35,11 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImpl implements Fin
     private ArrayList<String> search(ArrayList<ScenarioStepDTO> steps) {
         ArrayList<String> returnStepsNames = new ArrayList<>();
 
-        for(ScenarioStepDTO step: steps) {
+        for (ScenarioStepDTO step : steps) {
             String name = step.getName();
-            name = ignoreKeywords(name);
+            String nameWithoutKeyWords = ignoreKeywords(name);
 
-            if(!isStepNameCorrect(name)) {
+            if (!isStepNameCorrect(nameWithoutKeyWords)) {
                 returnStepsNames.add(name);
             }
 
@@ -58,6 +58,6 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImpl implements Fin
     }
 
     private boolean isStepNameCorrect(String line) {
-        return actors.stream().anyMatch(actor -> Pattern.compile("^" + actor + " ").matcher(line).find());
+        return actors.stream().anyMatch(actor -> Pattern.compile("^" + actor + "\\b").matcher(line).find());
     }
 }

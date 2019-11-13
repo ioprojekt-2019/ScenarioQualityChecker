@@ -17,12 +17,12 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
 
     private final String EXAMPLE_SYSTEM_ACTOR = "SYSTEM";
     private final String EXAMPLE_ACTOR = "EMPLOYEE";
-    private final String EXAMPLE_USELESS_STATEMENT = "SOMETHING";
+    private final String EXAMPLE_STATEMENT = "SOMETHING";
 
     private final String EXAMPLE_IF_STEP_NAME = "IF " + EXAMPLE_ACTOR + " HAS SALARY > 10k";
     private final String EXAMPLE_ELSE_STEP_NAME = "ELSE " + EXAMPLE_ACTOR + " HAS SALARY <= 10k";
     private final String EXAMPLE_FOR_EACH_STEP_NAME = "FOR EACH " + EXAMPLE_ACTOR + " TASK";
-    private final String EXAMPLE__STEP_NAME_KEYWORD_IN_THE_MIDDLE =  EXAMPLE_ACTOR + " SIGN THE PAPER FOR EACH INVOICE";
+    private final String EXAMPLE_STEP_NAME_KEYWORD_IN_THE_MIDDLE = EXAMPLE_ACTOR + " SIGN THE PAPER FOR EACH INVOICE";
 
     @Before
     public void setUp() {
@@ -63,6 +63,8 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
         assertEquals(lines.size(), stepsWithoutActorAtFirstPos);
+        assertEquals(lines.get(0), EXAMPLE_STATEMENT);
+        assertEquals(lines.get(lines.size()-1), EXAMPLE_STATEMENT);
     }
 
     @Test
@@ -76,6 +78,8 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
         assertEquals(lines.size(), stepsWithoutActorAtFirstPos);
+        assertEquals(lines.get(0), EXAMPLE_STATEMENT);
+        assertEquals(lines.get(lines.size()-1), EXAMPLE_STATEMENT);
     }
 
 
@@ -89,6 +93,8 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
         assertEquals(lines.size(), stepsWithoutActorAtFirstPos);
+        assertEquals(lines.get(0), EXAMPLE_STATEMENT);
+        assertEquals(lines.get(lines.size()-1), EXAMPLE_STATEMENT);
     }
 
     @Test
@@ -115,6 +121,8 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
         assertEquals(lines.size(), stepsWithoutActorAtFirstPos + nestedIncorrectSteps);
+        assertEquals(lines.get(0), EXAMPLE_STATEMENT);
+        assertEquals(lines.get(lines.size()-1), EXAMPLE_STATEMENT);
     }
 
     @Test
@@ -128,6 +136,8 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
         assertEquals(lines.size(), stepsWithoutActorAtFirstPos + nestedIncorrectSteps);
+        assertEquals(lines.get(0), EXAMPLE_STATEMENT);
+        assertEquals(lines.get(lines.size()-1), EXAMPLE_STATEMENT);
     }
 
     @Test
@@ -142,21 +152,23 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
         assertEquals(lines.size(), stepsWithoutActorAtFirstPos + nestedIncorrectSteps);
+        assertEquals(lines.get(0), EXAMPLE_STATEMENT);
+        assertEquals(lines.get(lines.size()-1), EXAMPLE_STATEMENT);
     }
 
     private ArrayList<String> prepareStepsName(int correctSteps, int stepsWithoutActorAtFirstPos) {
         ArrayList<String> steps = new ArrayList<>();
 
-        if(correctSteps > 0) {
-            steps.add(EXAMPLE_SYSTEM_ACTOR + " " + EXAMPLE_USELESS_STATEMENT);
+        if (correctSteps > 0) {
+            steps.add(EXAMPLE_SYSTEM_ACTOR + " " + EXAMPLE_STATEMENT);
         }
 
-        for(int i=0; i<correctSteps - 1; i++) {
-            steps.add(EXAMPLE_ACTOR + " " + EXAMPLE_USELESS_STATEMENT);
+        for (int i = 0; i < correctSteps - 1; i++) {
+            steps.add(EXAMPLE_ACTOR + " " + EXAMPLE_STATEMENT);
         }
 
-        for(int i=0; i<stepsWithoutActorAtFirstPos; i++) {
-            steps.add(EXAMPLE_USELESS_STATEMENT);
+        for (int i = 0; i < stepsWithoutActorAtFirstPos; i++) {
+            steps.add(EXAMPLE_STATEMENT);
         }
 
         return steps;
@@ -167,7 +179,7 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<ScenarioStepDTO> scenarioSteps = new ArrayList<>();
 
 
-        for(String sName: stepsName) {
+        for (String sName : stepsName) {
 
             ScenarioStepDTO scenarioStepDTO = new ScenarioStepDTO();
             scenarioStepDTO.setName(sName);
@@ -187,7 +199,7 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> stepsName = prepareStepsName(correctSteps, incorrectSteps);
         ArrayList<ScenarioStepDTO> scenarioSteps = new ArrayList<>();
 
-        for(String sName: stepsName) {
+        for (String sName : stepsName) {
 
             ScenarioStepDTO scenarioStepDTO = new ScenarioStepDTO();
             scenarioStepDTO.setName(sName);
@@ -200,23 +212,18 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
     private void addStepsWithKeywords(ScenarioStepDTO scenarioStepDTO) {
         ArrayList<ScenarioStepDTO> steps = new ArrayList<>();
         ScenarioStepDTO s;
+        String[] keyWordExamples = {
+                EXAMPLE_IF_STEP_NAME,
+                EXAMPLE_ELSE_STEP_NAME,
+                EXAMPLE_FOR_EACH_STEP_NAME,
+                EXAMPLE_STEP_NAME_KEYWORD_IN_THE_MIDDLE
+        };
 
-        s = new ScenarioStepDTO();
-        s.setName(EXAMPLE_IF_STEP_NAME);
-        steps.add(s);
-
-        s = new ScenarioStepDTO();
-        s.setName(EXAMPLE_ELSE_STEP_NAME);
-        steps.add(s);
-
-        s = new ScenarioStepDTO();
-        s.setName(EXAMPLE_FOR_EACH_STEP_NAME);
-        steps.add(s);
-
-        s = new ScenarioStepDTO();
-        s.setName(EXAMPLE__STEP_NAME_KEYWORD_IN_THE_MIDDLE);
-        steps.add(s);
-
+        for (String name : keyWordExamples) {
+            s = new ScenarioStepDTO();
+            s.setName(name);
+            steps.add(s);
+        }
         scenarioStepDTO.setSteps(steps);
     }
 }
