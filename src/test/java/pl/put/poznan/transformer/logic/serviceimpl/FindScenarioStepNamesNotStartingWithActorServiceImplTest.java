@@ -6,17 +6,12 @@ import pl.put.poznan.transformer.logic.domain.dto.ScenarioDTO;
 import pl.put.poznan.transformer.logic.domain.dto.ScenarioStepDTO;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
 
 public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
 
-    private FindScenarioStepNamesNotStartingWithActorServiceImpl findScenarioStepNamesNotStartingWithActorService;
+    private FindScenarioStepNamesNotStartingWithActorServiceImpl service;
 
     private final String[] EXAMPLE_KEYWORDS = new String[]{"IF", "ELSE", "FOR EACH"};
 
@@ -31,7 +26,7 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
 
     @Before
     public void setUp() {
-        this.findScenarioStepNamesNotStartingWithActorService = new FindScenarioStepNamesNotStartingWithActorServiceImpl(EXAMPLE_KEYWORDS);
+        this.service = new FindScenarioStepNamesNotStartingWithActorServiceImpl(EXAMPLE_KEYWORDS);
     }
 
     @Test
@@ -40,11 +35,10 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
 
         ArrayList<String> stepsName = prepareStepsName(correctSteps, stepsWithoutActorAtFirstPos);
         ScenarioDTO scenarioDTO = prepareScenario(stepsName);
-        ArrayList<String> incorrectStepsLines = retrieveIncorrectSteps(scenarioDTO);
 
-        ArrayList<String> lines = this.findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
+        ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
-        assertArrayEquals(incorrectStepsLines.toArray(), lines.toArray());
+        assertEquals(lines.size(), stepsWithoutActorAtFirstPos);
     }
 
     @Test
@@ -53,11 +47,10 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
 
         ArrayList<String> stepsName = prepareStepsName(correctSteps, stepsWithoutActorAtFirstPos);
         ScenarioDTO scenarioDTO = prepareScenario(stepsName);
-        ArrayList<String> incorrectStepsLines = retrieveIncorrectSteps(scenarioDTO);
 
-        ArrayList<String> lines = this.findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
+        ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
-        assertArrayEquals(incorrectStepsLines.toArray(), lines.toArray());
+        assertEquals(lines.size(), stepsWithoutActorAtFirstPos);
     }
 
     @Test
@@ -66,11 +59,10 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
 
         ArrayList<String> stepsName = prepareStepsName(correctSteps, stepsWithoutActorAtFirstPos);
         ScenarioDTO scenarioDTO = prepareScenario(stepsName);
-        ArrayList<String> incorrectStepsLines = retrieveIncorrectSteps(scenarioDTO);
 
-        ArrayList<String> lines = this.findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
+        ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
-        assertArrayEquals(incorrectStepsLines.toArray(), lines.toArray());
+        assertEquals(lines.size(), stepsWithoutActorAtFirstPos);
     }
 
     @Test
@@ -80,11 +72,10 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> stepsName = prepareStepsName(correctSteps, stepsWithoutActorAtFirstPos);
         ScenarioDTO scenarioDTO = prepareScenario(stepsName);
         addStepsWithKeywords(scenarioDTO.getSteps().get(0));
-        ArrayList<String> incorrectStepsLines = retrieveIncorrectSteps(scenarioDTO);
 
-        ArrayList<String> lines = this.findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
+        ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
-        assertArrayEquals(incorrectStepsLines.toArray(), lines.toArray());
+        assertEquals(lines.size(), stepsWithoutActorAtFirstPos);
     }
 
 
@@ -94,11 +85,10 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
 
         ArrayList<String> stepsName = prepareStepsName(correctSteps, stepsWithoutActorAtFirstPos);
         ScenarioDTO scenarioDTO = prepareScenario(stepsName);
-        ArrayList<String> incorrectStepsLines = retrieveIncorrectSteps(scenarioDTO);
 
-        ArrayList<String> lines = this.findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
+        ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
-        assertArrayEquals(incorrectStepsLines.toArray(), lines.toArray());
+        assertEquals(lines.size(), stepsWithoutActorAtFirstPos);
     }
 
     @Test
@@ -108,11 +98,10 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> stepsName = prepareStepsName(correctSteps, stepsWithoutActorAtFirstPos);
         ScenarioDTO scenarioDTO = prepareScenario(stepsName);
         addNestedSteps(scenarioDTO, nestedCorrectSteps, nestedIncorrectSteps);
-        ArrayList<String> incorrectStepsLines = retrieveIncorrectSteps(scenarioDTO);
 
-        ArrayList<String> lines = this.findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
+        ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
-        assertArrayEquals(incorrectStepsLines.toArray(), lines.toArray());
+        assertEquals(lines.size(), stepsWithoutActorAtFirstPos + nestedIncorrectSteps);
     }
 
     @Test
@@ -122,11 +111,10 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> stepsName = prepareStepsName(correctSteps, stepsWithoutActorAtFirstPos);
         ScenarioDTO scenarioDTO = prepareScenario(stepsName);
         addNestedSteps(scenarioDTO, nestedCorrectSteps, nestedIncorrectSteps);
-        ArrayList<String> incorrectStepsLines = retrieveIncorrectSteps(scenarioDTO);
 
-        ArrayList<String> lines = this.findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
+        ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
-        assertArrayEquals(incorrectStepsLines.toArray(), lines.toArray());
+        assertEquals(lines.size(), stepsWithoutActorAtFirstPos + nestedIncorrectSteps);
     }
 
     @Test
@@ -136,11 +124,10 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> stepsName = prepareStepsName(correctSteps, stepsWithoutActorAtFirstPos);
         ScenarioDTO scenarioDTO = prepareScenario(stepsName);
         addNestedSteps(scenarioDTO, nestedCorrectSteps, nestedIncorrectSteps);
-        ArrayList<String> incorrectStepsLines = retrieveIncorrectSteps(scenarioDTO);
 
-        ArrayList<String> lines = this.findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
+        ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
-        assertArrayEquals(incorrectStepsLines.toArray(), lines.toArray());
+        assertEquals(lines.size(), stepsWithoutActorAtFirstPos + nestedIncorrectSteps);
     }
 
     @Test
@@ -150,12 +137,11 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
         ArrayList<String> stepsName = prepareStepsName(correctSteps, stepsWithoutActorAtFirstPos);
         ScenarioDTO scenarioDTO = prepareScenario(stepsName);
         addNestedSteps(scenarioDTO, nestedCorrectSteps, nestedIncorrectSteps);
-        addStepsWithKeywords(scenarioDTO.getSteps().get(0));
-        ArrayList<String> incorrectStepsLines = retrieveIncorrectSteps(scenarioDTO);
+        addStepsWithKeywords(scenarioDTO.getSteps().get(1));
 
-        ArrayList<String> lines = this.findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
+        ArrayList<String> lines = this.service.findStepNames(scenarioDTO);
 
-        assertArrayEquals(incorrectStepsLines.toArray(), lines.toArray());
+        assertEquals(lines.size(), stepsWithoutActorAtFirstPos + nestedIncorrectSteps);
     }
 
     private ArrayList<String> prepareStepsName(int correctSteps, int stepsWithoutActorAtFirstPos) {
@@ -233,39 +219,4 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImplTest {
 
         scenarioStepDTO.setSteps(steps);
     }
-
-    private ArrayList<String> retrieveIncorrectSteps(ScenarioDTO scenarioDTO) {
-        ArrayList<String> cSteps = new ArrayList<>();
-        Set<String> actors = new HashSet<String>();
-
-        actors.add(EXAMPLE_ACTOR);
-        actors.add(EXAMPLE_SYSTEM_ACTOR);
-
-
-        Function<ScenarioStepDTO, ArrayList<String>> getIncorrectSubSteps;
-        getIncorrectSubSteps = (ScenarioStepDTO subst) -> {
-
-            ArrayList<String> substNames = new ArrayList<>();
-
-            for(ScenarioStepDTO step: subst.getSteps()) {
-                if(!actors.stream().anyMatch(actor -> Pattern.compile("^" + actor + " ").matcher(step.getName()).find())) {
-                    cSteps.add(step.getName());
-                }
-            }
-
-            return substNames;
-        };
-
-
-        for(ScenarioStepDTO step: scenarioDTO.getSteps()) {
-            if(!actors.stream().anyMatch(actor -> Pattern.compile("^" + actor + " ").matcher(step.getName()).find())) {
-                cSteps.add(step.getName());
-            }
-
-            cSteps.addAll(getIncorrectSubSteps.apply(step));
-        }
-
-        return cSteps;
-    }
-
 }

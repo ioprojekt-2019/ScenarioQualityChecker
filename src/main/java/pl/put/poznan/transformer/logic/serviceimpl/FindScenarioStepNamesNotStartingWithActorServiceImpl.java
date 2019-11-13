@@ -37,7 +37,7 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImpl implements Fin
 
         for(ScenarioStepDTO step: steps) {
             String name = step.getName();
-            ignoreKeywords(name);
+            name = ignoreKeywords(name);
 
             if(!isStepNameCorrect(name)) {
                 returnStepsNames.add(name);
@@ -49,8 +49,12 @@ public class FindScenarioStepNamesNotStartingWithActorServiceImpl implements Fin
         return returnStepsNames;
     }
 
-    private void ignoreKeywords(String line) {
-        Arrays.stream(keywords).forEach(keyword -> line.replaceAll("^" + keyword + " ", ""));
+    private String ignoreKeywords(String line) {
+        for (String keyword : keywords) {
+            line = line.replaceFirst("^" + keyword + " ", "");
+        }
+
+        return line;
     }
 
     private boolean isStepNameCorrect(String line) {

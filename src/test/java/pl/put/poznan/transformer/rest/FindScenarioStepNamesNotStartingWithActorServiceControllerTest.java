@@ -19,20 +19,20 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FindScenarioStepNamesNotStartingWithActorServiceControllerTest {
-    private FindScenarioStepNamesNotStartingWithActorServiceController findScenarioStepNamesNotStartingWithActorServiceController;
+    private FindScenarioStepNamesNotStartingWithActorServiceController controller;
 
     @Mock
-    private FindScenarioStepNamesNotStartingWithActorService findScenarioStepNamesNotStartingWithActorService;
+    private FindScenarioStepNamesNotStartingWithActorService service;
 
     @Before
     public void setUp() {
-        findScenarioStepNamesNotStartingWithActorServiceController = new FindScenarioStepNamesNotStartingWithActorServiceController(findScenarioStepNamesNotStartingWithActorService);
+        controller = new FindScenarioStepNamesNotStartingWithActorServiceController(service);
     }
 
     @Test
     public void testFindScenarioStepNamesNotStartingWithActorActionReturnsStepNamesOnSuccess() {
         mockFindScenarioLinesNotStartingWithActorServiceReturnsOneLine();
-        ResponseEntity<Map<String, ArrayList<String>>> result = findScenarioStepNamesNotStartingWithActorServiceController
+        ResponseEntity<Map<String, ArrayList<String>>> result = controller
                 .getFindScenarioLinesWithoutActorInFirstWordAction(new ScenarioDTO());
         assertHaveLineAnd200HttpStatus(result);
     }
@@ -40,7 +40,7 @@ public class FindScenarioStepNamesNotStartingWithActorServiceControllerTest {
     private void mockFindScenarioLinesNotStartingWithActorServiceReturnsOneLine() {
         ArrayList<String> response = new ArrayList<>();
         response.add("SOMETHING");
-        Mockito.when(findScenarioStepNamesNotStartingWithActorService.findStepNames(Mockito.any())).thenReturn(response);
+        Mockito.when(service.findStepNames(Mockito.any())).thenReturn(response);
     }
 
     private void assertHaveLineAnd200HttpStatus(ResponseEntity<Map<String, ArrayList<String>>> response) {
