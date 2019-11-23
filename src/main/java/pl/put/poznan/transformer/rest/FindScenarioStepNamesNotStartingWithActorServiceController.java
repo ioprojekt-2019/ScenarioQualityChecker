@@ -21,8 +21,8 @@ public class FindScenarioStepNamesNotStartingWithActorServiceController {
     }
 
     /**
-     * Method: GetMapping<br>
-     * Endpoint: /api/scenario/steps/count<br>
+     * Method: Post<br>
+     * Endpoint: /api/scenario/steps/not-starting-with-actor<br>
      * @param scenarioDTO Object representing scenario created from parsed JSON body
      * @return JSON containing incorrect step names:
      *      <pre>
@@ -31,7 +31,7 @@ public class FindScenarioStepNamesNotStartingWithActorServiceController {
      *      }
      *      </pre>
      */
-    @PostMapping("/steps/not-starting-with-actor")
+    @PostMapping("/scenario/steps/not-starting-with-actor")
     public ResponseEntity<Map<String, ArrayList<String>>> getFindScenarioLinesWithoutActorInFirstWordAction(@RequestBody ScenarioDTO scenarioDTO) {
         ArrayList<String> lines = findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
 
