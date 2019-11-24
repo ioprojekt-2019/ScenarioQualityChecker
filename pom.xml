@@ -6,7 +6,7 @@
 
     <groupId>pl.put.poznan</groupId>
     <artifactId>io-scenario-quality-checker</artifactId>
-    <version>1.2</version>
+    <version>1.3-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
