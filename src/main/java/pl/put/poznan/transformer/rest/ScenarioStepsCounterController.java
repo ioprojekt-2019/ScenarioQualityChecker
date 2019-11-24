@@ -2,7 +2,7 @@ package pl.put.poznan.transformer.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.transformer.logic.domain.dto.ScenarioDTO;
@@ -21,7 +21,7 @@ public class ScenarioStepsCounterController {
     }
 
     /**
-     * Method: GET<br>
+     * Method: POST<br>
      * Endpoint: /api/scenario/steps/count<br>
      * @param scenarioDTO Object representing scenario created from parsed JSON body
      * @return Object representing below JSON with example values:
@@ -31,7 +31,7 @@ public class ScenarioStepsCounterController {
      *      }
      *      </pre>
      */
-    @GetMapping("/scenario/steps/count")
+    @PostMapping("/scenario/steps/count")
     public ResponseEntity<Map<String, Integer>> countScenarioStepsAction(@Valid @RequestBody ScenarioDTO scenarioDTO) {
         int stepsCount = scenarioStepsCounterService.getCount(scenarioDTO);
         Map<String, Integer> response = new HashMap<>();

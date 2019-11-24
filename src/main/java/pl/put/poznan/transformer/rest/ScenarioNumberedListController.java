@@ -2,12 +2,11 @@ package pl.put.poznan.transformer.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.transformer.logic.domain.dto.ScenarioDTO;
 import pl.put.poznan.transformer.logic.service.ScenarioNumberedListService;
-import pl.put.poznan.transformer.logic.service.ScenarioStepsCounterService;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -26,7 +25,7 @@ public class ScenarioNumberedListController {
     }
 
     /**
-     * Method: GET<br>
+     * Method: POST<br>
      * Endpoint: /api/scenario/numbered-steps<br>
      * @param scenarioDTO Object representing scenario created from parsed JSON body
      * @return Object representing below JSON with example values:
@@ -43,7 +42,7 @@ public class ScenarioNumberedListController {
      *      }
      *      </pre>
      */
-   @GetMapping("/scenario/numbered-steps")
+   @PostMapping("/scenario/numbered-steps")
     public ResponseEntity<Map<String, String>> numberedListAction(@Valid @RequestBody ScenarioDTO scenarioDTO) {
         String stepsList = scenarioNumberedListService.getScenarioAsNumberedList(scenarioDTO);
         Map<String, String> response = new HashMap<>();
