@@ -1,5 +1,6 @@
 package pl.put.poznan.transformer.logic.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.validator.constraints.NotEmpty;
 import pl.put.poznan.transformer.logic.validator.ListOfNonemptyStrings;
 
@@ -14,10 +15,23 @@ public class ScenarioDTO {
     private String systemActor;
 
     @ListOfNonemptyStrings(message = "Each actor must be a nonempty string")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private ArrayList<String> actors = new ArrayList<>();
 
     @Valid
     private ArrayList<ScenarioStepDTO> steps = new ArrayList<>();
+
+    public ScenarioDTO() {
+    }
+
+    public ScenarioDTO(ScenarioDTO otherScenario) {
+        setTitle(otherScenario.getTitle());
+        setActors(otherScenario.getActors());
+        setSystemActor(otherScenario.getSystemActor());
+        for (ScenarioStepDTO scenarioStep : otherScenario.getSteps()) {
+            steps.add(new ScenarioStepDTO(scenarioStep));
+        }
+    }
 
     public ArrayList<ScenarioStepDTO> getSteps() {
         return steps;
