@@ -2,7 +2,7 @@ package pl.put.poznan.transformer.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.transformer.logic.domain.dto.ScenarioDTO;
@@ -24,7 +24,7 @@ public class ScenarioKeywordsCounterController {
     }
 
     /**
-     * Method: GET
+     * Method: POST
      * Endpoint: /api/scenario/keywords/count
      *
      * @param scenarioDTO scenario object representing parsed JSON body
@@ -35,7 +35,7 @@ public class ScenarioKeywordsCounterController {
      *      }
      * </pre>
      */
-    @GetMapping("/scenario/keywords/count")
+    @PostMapping("/scenario/keywords/count")
     public ResponseEntity<Map<String, Integer>> countScenarioKeywordsAction(@Valid @RequestBody ScenarioDTO scenarioDTO) {
         int keywordsCount = scenarioKeywordsCounterService.getNumberOfKeywords(scenarioDTO);
         Map<String, Integer> response = new HashMap<>();
