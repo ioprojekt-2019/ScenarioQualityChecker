@@ -11,6 +11,7 @@ import pl.put.poznan.transformer.logic.service.FindScenarioStepNamesNotStartingW
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.validation.Valid;
 
 @RestController
 public class FindScenarioStepNamesNotStartingWithActorServiceController {
@@ -32,7 +33,7 @@ public class FindScenarioStepNamesNotStartingWithActorServiceController {
      *      </pre>
      */
     @PostMapping("/scenario/steps/not-starting-with-actor")
-    public ResponseEntity<Map<String, ArrayList<String>>> getFindScenarioLinesWithoutActorInFirstWordAction(@RequestBody ScenarioDTO scenarioDTO) {
+    public ResponseEntity<Map<String, ArrayList<String>>> getFindScenarioLinesWithoutActorInFirstWordAction(@Valid @RequestBody ScenarioDTO scenarioDTO) {
         ArrayList<String> lines = findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
 
         Map<String, ArrayList<String>> response = new HashMap<>();
