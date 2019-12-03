@@ -1,5 +1,7 @@
 package pl.put.poznan.transformer.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,8 @@ import javax.validation.Valid;
 @RestController
 public class FindScenarioStepNamesNotStartingWithActorServiceController {
     private final FindScenarioStepNamesNotStartingWithActorService findScenarioStepNamesNotStartingWithActorService;
+
+    private static final Logger logger = LoggerFactory.getLogger(FindScenarioStepNamesNotStartingWithActorServiceController.class);
 
     public FindScenarioStepNamesNotStartingWithActorServiceController(FindScenarioStepNamesNotStartingWithActorService findScenarioStepNamesNotStartingWithActorService) {
         this.findScenarioStepNamesNotStartingWithActorService = findScenarioStepNamesNotStartingWithActorService;
@@ -34,10 +38,13 @@ public class FindScenarioStepNamesNotStartingWithActorServiceController {
      */
     @PostMapping("/scenario/steps/not-starting-with-actor")
     public ResponseEntity<Map<String, ArrayList<String>>> getFindScenarioLinesWithoutActorInFirstWordAction(@Valid @RequestBody ScenarioDTO scenarioDTO) {
-        ArrayList<String> lines = findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
+        logger.info("Operating on /scenario/steps/not-starting-with-actor");
 
+        ArrayList<String> lines = findScenarioStepNamesNotStartingWithActorService.findStepNames(scenarioDTO);
         Map<String, ArrayList<String>> response = new HashMap<>();
         response.put("lines", lines);
+
+        logger.debug("Steps without actors: " + response.toString());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

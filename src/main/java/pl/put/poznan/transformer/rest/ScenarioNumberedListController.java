@@ -1,5 +1,7 @@
 package pl.put.poznan.transformer.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,8 @@ import java.util.Map;
 @RestController
 public class ScenarioNumberedListController {
     private final ScenarioNumberedListService scenarioNumberedListService;
+
+    private static final Logger logger = LoggerFactory.getLogger(ScenarioNumberedListController.class);
 
     public ScenarioNumberedListController(ScenarioNumberedListService scenarioNumberedListService) {
         this.scenarioNumberedListService = scenarioNumberedListService;
@@ -44,10 +48,13 @@ public class ScenarioNumberedListController {
      */
    @PostMapping("/scenario/numbered-steps")
     public ResponseEntity<Map<String, String>> numberedListAction(@Valid @RequestBody ScenarioDTO scenarioDTO) {
+        logger.info("Operating on /scenario/numbered-steps endpoint");
+
         String stepsList = scenarioNumberedListService.getScenarioAsNumberedList(scenarioDTO);
         Map<String, String> response = new HashMap<>();
         response.put("numbered-steps", stepsList);
 
+        logger.debug("Scenario as numbered list: " + stepsList);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

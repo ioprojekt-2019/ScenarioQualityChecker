@@ -1,5 +1,7 @@
 package pl.put.poznan.transformer.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,8 @@ import java.util.Map;
 @RestController
 public class ScenarioStepsCounterController {
     private final ScenarioStepsCounterService scenarioStepsCounterService;
+
+    private static final Logger logger = LoggerFactory.getLogger(ScenarioStepsCounterController.class);
 
     public ScenarioStepsCounterController(ScenarioStepsCounterService scenarioStepsCounterService) {
         this.scenarioStepsCounterService = scenarioStepsCounterService;
@@ -37,6 +41,7 @@ public class ScenarioStepsCounterController {
         Map<String, Integer> response = new HashMap<>();
         response.put("count", stepsCount);
 
+        logger.debug("Scenario steps number: " + stepsCount);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
