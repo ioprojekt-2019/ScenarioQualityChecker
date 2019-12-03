@@ -1,5 +1,7 @@
 package pl.put.poznan.transformer.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,8 @@ import javax.validation.Valid;
 @RestController
 public class ScenarioCutToDepthController {
     private final ScenarioCutToDepthService scenarioCutToDepthService;
+
+    private static final Logger logger = LoggerFactory.getLogger(ScenarioCutToDepthController.class);
 
     public ScenarioCutToDepthController(ScenarioCutToDepthService scenarioCutToDepthService) {
         this.scenarioCutToDepthService = scenarioCutToDepthService;
@@ -40,6 +44,8 @@ public class ScenarioCutToDepthController {
     @PostMapping("/scenario/cut-to-depth")
     public ResponseEntity<ScenarioDTO> cutScenarioToDepthAction(
             @Valid @RequestBody ScenarioCutToDepthRequestDTO scenarioCutToDepthRequest) {
+        logger.info("Operating on /scenario/cut-to-depth endpoint");
+
         ScenarioDTO cutScenario = scenarioCutToDepthService.cutScenarioToDepthLevel(scenarioCutToDepthRequest);
 
         return new ResponseEntity<>(cutScenario, HttpStatus.OK);

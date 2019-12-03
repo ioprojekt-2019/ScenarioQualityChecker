@@ -1,5 +1,7 @@
 package pl.put.poznan.transformer.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,8 @@ import java.util.Map;
 public class ScenarioKeywordsCounterController {
     private final ScenarioKeywordsCounterService scenarioKeywordsCounterService;
 
+    private static final Logger logger = LoggerFactory.getLogger(ScenarioStepsCounterController.class);
+
     public ScenarioKeywordsCounterController(ScenarioKeywordsCounterService scenarioKeywordsCounterService) {
         this.scenarioKeywordsCounterService = scenarioKeywordsCounterService;
     }
@@ -37,10 +41,13 @@ public class ScenarioKeywordsCounterController {
      */
     @PostMapping("/scenario/keywords/count")
     public ResponseEntity<Map<String, Integer>> countScenarioKeywordsAction(@Valid @RequestBody ScenarioDTO scenarioDTO) {
+        logger.info("Operating on /scenario/keywords/count endpoint");
+
         int keywordsCount = scenarioKeywordsCounterService.getNumberOfKeywords(scenarioDTO);
         Map<String, Integer> response = new HashMap<>();
         response.put("count", keywordsCount);
 
+        logger.debug("Number of keywords in a scenario: " + keywordsCount);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
